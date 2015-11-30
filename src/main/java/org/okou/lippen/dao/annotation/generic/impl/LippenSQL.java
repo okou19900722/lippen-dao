@@ -1,10 +1,15 @@
 package org.okou.lippen.dao.annotation.generic.impl;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.apache.ibatis.jdbc.SQL;
+import org.okou.lippen.commons.annotation.util.AnnotationUtils;
 import org.okou.lippen.dao.annotation.mybatis.LippenParam;
+import org.okou.lippen.dao.annotation.mybatis.annotation.Column;
+import org.okou.lippen.dao.annotation.mybatis.annotation.Id;
+import org.okou.lippen.dao.annotation.mybatis.annotation.util.AnnotationValueUtil;
 
 public class LippenSQL<T> extends SQL
 {
@@ -22,29 +27,28 @@ public class LippenSQL<T> extends SQL
 		this.param = p;
 	}
 
-	protected String getColumns(List<Field> fields, boolean skipId)
+	protected String getColumns(List<Field> fields, boolean skipId) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException
 	{
 		if (fields == null || fields.size() == 0)
 			return "*";
 		StringBuffer sb = new StringBuffer();
 		for (Field f : fields)
 		{
-			//TODO 通过ID注解来排队，不能通过名字
-			if(skipId && f.getName().equals("id"))continue;
+			if(AnnotationUtils.hasAnnotation(f, Id.class))continue;
 			if (sb.length() > 0)
 				sb.append(",");
-			//TODO 不能直接用字段名，要用column注解来取值
-			sb.append(f.getName());
+			String columnName = AnnotationValueUtil.getValue(f, Column.class, f.getName(), false);
+			sb.append(columnName);
 		}
 		return sb.toString();
 	}
-	protected String getColumns(List<Field> fields)
+	protected String getColumns(List<Field> fields) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException
 	{
 		return getColumns(fields, false);
 	}
 
 	protected String getWhereSQL(List<Field> fields, String prepend)
-			throws IllegalArgumentException, IllegalAccessException
+			throws IllegalArgumentException, IllegalAccessException, SecurityException, NoSuchMethodException, InvocationTargetException
 	{
 		if (fields == null || fields.size() == 0)
 			return "";
@@ -58,8 +62,8 @@ public class LippenSQL<T> extends SQL
 			{
 				if (sb.length() > 0)
 					sb.append(prepend);
-				//TODO 不能直接用字段名，要用column注解来取值
-				sb.append(f.getName()).append("=").append(o);
+				String columnName = AnnotationValueUtil.getValue(f, Column.class, f.getName(), false);
+				sb.append(columnName).append("=").append(o);
 			}
 		}
 		return sb.toString();

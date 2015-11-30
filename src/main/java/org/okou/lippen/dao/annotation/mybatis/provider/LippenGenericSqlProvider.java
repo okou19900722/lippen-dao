@@ -1,21 +1,22 @@
 package org.okou.lippen.dao.annotation.mybatis.provider;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.okou.lippen.commons.annotation.util.AnnotationUtils;
-import org.okou.lippen.commons.util.string.StringUtils;
 import org.okou.lippen.dao.annotation.generic.impl.LippenSQL;
 import org.okou.lippen.dao.annotation.mybatis.LippenParam;
 import org.okou.lippen.dao.annotation.mybatis.annotation.Table;
+import org.okou.lippen.dao.annotation.mybatis.annotation.util.AnnotationValueUtil;
 
 public class LippenGenericSqlProvider
 {
-	public <T> String findAll(LippenParam<T> p)
+	public <T> String findAll(LippenParam<T> p) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException
 	{
-		final String tableName = getTableName(p.getPo());
+		Class<?> c = p.getClass();
+		final String tableName = AnnotationValueUtil.getValue(c, Table.class, c.getSimpleName());
 		return new LippenSQL<T>(){
 			{
 				SELECT("*");
@@ -23,9 +24,10 @@ public class LippenGenericSqlProvider
 			}
 		}.toString();
 	}
-	public <T> String get(T p) throws IllegalAccessException
+	public <T> String get(T p) throws IllegalAccessException, SecurityException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException
 	{
-		final String tableName = getTableName(p);
+		Class<?> c = p.getClass();
+		final String tableName = AnnotationValueUtil.getValue(c, Table.class, c.getSimpleName());
 		Field[] fields = p.getClass().getDeclaredFields();
 		final List<Field> fieldList = new ArrayList<Field>();
 		for (Field field : fields)
@@ -44,9 +46,10 @@ public class LippenGenericSqlProvider
 			}
 		}.toString();
 	}
-	public <T> String save(T p) throws IllegalAccessException
+	public <T> String save(T p) throws IllegalAccessException, SecurityException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException
 	{
-		final String tableName = getTableName(p);
+		Class<?> c = p.getClass();
+		final String tableName = AnnotationValueUtil.getValue(c, Table.class, c.getSimpleName());
 		Field[] fields = p.getClass().getDeclaredFields();
 		final List<Field> fieldList = new ArrayList<Field>();
 		for (Field field : fields)
@@ -63,21 +66,39 @@ public class LippenGenericSqlProvider
 				VALUES(getColumns(fieldList, true), getValuesSQL(fieldList, ","));
 			}
 		}.toString();
-		System.err.println(s);
 		return s;
 	}
-	//TODO Ìí¼Óupdate ºÍ delete µÄsqlÓï¾ä£¬È»ºó·µ»Ø
-	//TODO Í¨¹ı@link{TestTeacherMapper}½øĞĞµ¥Ôª²âÊÔ
-	
-	
-	private <T> String getTableName(T t)
+	//TODO æ·»åŠ update å’Œ delete çš„sqlè¯­å¥ï¼Œç„¶åè¿”å›
+	public String update()
 	{
-		if(!AnnotationUtils.hasAnnotation(t.getClass(), Table.class))
-		{
-			throw new RuntimeException("type " + t.getClass() + " need a annotation with org.okou.lippen.dao.annotation.mybatis.annotation.Table");
-		}
-		String table = t.getClass().getAnnotation(Table.class).value();
-		table = "".equals(table) ? StringUtils.lowerCaseFirstWord(t.getClass().getSimpleName()) : table;
-		return table;
+		return null;
 	}
+	//TODO é€šè¿‡@link{TestTeacherMapper}è¿›è¡Œå•å…ƒæµ‹è¯•
+	public String delete()
+	{
+		return null;
+	}
+	/**
+	 * é»˜è®¤éé™æ€çš„å˜é‡éƒ½æ˜¯column
+	 * @param c
+	 * @return
+	 *
+	 *@author ä¸¥å°šå›
+	 *
+	 *@date 2015-11-30
+	 */
+	private List<Field> getColumnField(Class<?> c)
+	{
+		Field[] fields = c.getDeclaredFields();
+		List<Field> fieldList = new ArrayList<Field>();
+		for (Field field : fields)
+		{
+			if(!Modifier.isStatic(field.getModifiers()))
+			{
+				fieldList.add(field);
+			}
+		}
+		return fieldList;
+	}
+	
 }

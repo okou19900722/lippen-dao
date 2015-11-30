@@ -9,36 +9,36 @@ public interface ISqlMapEntity extends ISqlMapDelayedInsertable,
 		ISqlMapDelayedUpdatable, Serializable
 {
 	/**
-	 * 获取sql map里面的select节点的id
+	 * 鑾峰彇sql map閲岄潰鐨剆elect鑺傜偣鐨刬d
 	 * 
-	 * @return sql map里面的select节点的id
+	 * @return sql map閲岄潰鐨剆elect鑺傜偣鐨刬d
 	 * @author EXvision
 	 * @since 2013-2-22
 	 */
 	public String selectId();
 
 	/**
-	 * 获取sql map里面的insert节点的id
+	 * 鑾峰彇sql map閲岄潰鐨刬nsert鑺傜偣鐨刬d
 	 * 
-	 * @return sql map里面的insert节点的id
+	 * @return sql map閲岄潰鐨刬nsert鑺傜偣鐨刬d
 	 * @author EXvision
 	 * @since 2013-2-22
 	 */
 	public String insertId();
 
 	/**
-	 * 获取sql map里面的update节点的id
+	 * 鑾峰彇sql map閲岄潰鐨剈pdate鑺傜偣鐨刬d
 	 * 
-	 * @return sql map里面的update节点的id
+	 * @return sql map閲岄潰鐨剈pdate鑺傜偣鐨刬d
 	 * @author EXvision
 	 * @since 2012-11-28
 	 */
 	public String updateId();
 
 	/**
-	 * 获取sql map里面的delete节点的id
+	 * 鑾峰彇sql map閲岄潰鐨刣elete鑺傜偣鐨刬d
 	 * 
-	 * @return sql map里面的delete节点的id
+	 * @return sql map閲岄潰鐨刣elete鑺傜偣鐨刬d
 	 * @author EXvision
 	 * @since 2013-2-22
 	 */

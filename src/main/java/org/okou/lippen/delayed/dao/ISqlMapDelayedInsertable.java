@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public interface ISqlMapDelayedInsertable extends Serializable{
 	/**
-	 * 获取sql map里面的insert节点的id 便于延迟更新器进行批量insert
+	 * 鑾峰彇sql map閲岄潰鐨刬nsert鑺傜偣鐨刬d 渚夸簬寤惰繜鏇存柊鍣ㄨ繘琛屾壒閲廼nsert
 	 * 
-	 * @return sql map里面的insert节点的id
+	 * @return sql map閲岄潰鐨刬nsert鑺傜偣鐨刬d
 	 * @author EXvision
 	 * @since 2012-11-28
 	 */

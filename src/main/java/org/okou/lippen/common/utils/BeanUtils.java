@@ -22,7 +22,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.ReflectionUtils;
 
 /**
- * »ùÓÚjakarta commons BeanUtils
+ * åŸºäºjakarta commons BeanUtils
  * 
  * @author EXvision
  */
@@ -33,14 +33,14 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 	private static PropertyUtilsBean propertyUtilsBean;
 
 	/**
-	 * ¸´ÖÆÊµÀıµÄ×Ö¶Î ºöÂÔ²¿·ÖÉè¶¨µÄ×Ö¶Î
+	 * å¤åˆ¶å®ä¾‹çš„å­—æ®µ å¿½ç•¥éƒ¨åˆ†è®¾å®šçš„å­—æ®µ
 	 * 
 	 * @param dest
-	 *            Ä¿±êÊµÀı
+	 *            ç›®æ ‡å®ä¾‹
 	 * @param orig
-	 *            À´Ô´ÊµÀı
+	 *            æ¥æºå®ä¾‹
 	 * @param ignoreProperties
-	 *            ËùĞèÒªºöÂÔµÄ×Ö¶Î
+	 *            æ‰€éœ€è¦å¿½ç•¥çš„å­—æ®µ
 	 */
 	public static void copyProperties(Object dest, Object orig,
 			String... ignoreProperties)
@@ -50,12 +50,12 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 	}
 
 	/**
-	 * ¸´ÖÆÊµÀıµÄ×Ö¶Î <b>ºöÂÔnull×Ö¶Î</b>
+	 * å¤åˆ¶å®ä¾‹çš„å­—æ®µ <b>å¿½ç•¥nullå­—æ®µ</b>
 	 * 
 	 * @param dest
-	 *            Ä¿±êÊµÀı
+	 *            ç›®æ ‡å®ä¾‹
 	 * @param orig
-	 *            À´Ô´ÊµÀı
+	 *            æ¥æºå®ä¾‹
 	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException
 	 */
@@ -147,16 +147,16 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 	}
 
 	/**
-	 * Bean×ª»»µ½MapµÄ·½·¨<br>
+	 * Beanè½¬æ¢åˆ°Mapçš„æ–¹æ³•<br>
 	 * <ul>
-	 * <li><b>value¿ÕÖµ</b>½«»á±»ºöÂÔ</li>
-	 * <li><b>key=class</b>µÄÏî£¬½«»á±»ºöÂÔ</li>
+	 * <li><b>valueç©ºå€¼</b>å°†ä¼šè¢«å¿½ç•¥</li>
+	 * <li><b>key=class</b>çš„é¡¹ï¼Œå°†ä¼šè¢«å¿½ç•¥</li>
 	 * </ul>
-	 * ¾ßÌåÇë¿´Ô´´úÂë
+	 * å…·ä½“è¯·çœ‹æºä»£ç 
 	 * 
 	 * @param bean
-	 *            ´ı×ª»»µÄpojo
-	 * @return ×ª»»ºóµÄMap
+	 *            å¾…è½¬æ¢çš„pojo
+	 * @return è½¬æ¢åçš„Map
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Map describe(Object bean)
@@ -195,11 +195,11 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 	}
 
 	/**
-	 * Í¨¹ı·´Éä»ñÈ¡±äÁ¿ Òì³£²»Å×³ö
+	 * é€šè¿‡åå°„è·å–å˜é‡ å¼‚å¸¸ä¸æŠ›å‡º
 	 * 
 	 * @param bean
 	 * @param name
-	 * @return Öµ»òNull
+	 * @return å€¼æˆ–Null
 	 */
 	public static String getPropertyQuietly(Object bean, String name)
 	{
@@ -223,10 +223,10 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 	}
 
 	/**
-	 * Ñ­»·ÏòÉÏ×ªĞÍ,»ñÈ¡¶ÔÏóµÄDeclaredField.
+	 * å¾ªç¯å‘ä¸Šè½¬å‹,è·å–å¯¹è±¡çš„DeclaredField.
 	 * 
 	 * @throws NoSuchFieldException
-	 *             Èç¹ûÃ»ÓĞ¸ÃFieldÊ±Å×³ö.
+	 *             å¦‚æœæ²¡æœ‰è¯¥Fieldæ—¶æŠ›å‡º.
 	 */
 	public static Field getDeclaredField(Object object, String propertyName)
 			throws NoSuchFieldException
@@ -237,10 +237,10 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 	}
 
 	/**
-	 * Ñ­»·ÏòÉÏ×ªĞÍ,»ñÈ¡¶ÔÏóµÄDeclaredField.
+	 * å¾ªç¯å‘ä¸Šè½¬å‹,è·å–å¯¹è±¡çš„DeclaredField.
 	 * 
 	 * @throws NoSuchFieldException
-	 *             Èç¹ûÃ»ÓĞ¸ÃFieldÊ±Å×³ö.
+	 *             å¦‚æœæ²¡æœ‰è¯¥Fieldæ—¶æŠ›å‡º.
 	 */
 	public static Field getDeclaredField(Class<?> clazz, String propertyName)
 			throws NoSuchFieldException
@@ -256,7 +256,7 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 			}
 			catch (NoSuchFieldException e)
 			{
-				// Field²»ÔÚµ±Ç°Àà¶¨Òå,¼ÌĞøÏòÉÏ×ªĞÍ
+				// Fieldä¸åœ¨å½“å‰ç±»å®šä¹‰,ç»§ç»­å‘ä¸Šè½¬å‹
 			}
 		}
 		throw new NoSuchFieldException("No such field: " + clazz.getName()
@@ -264,10 +264,10 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 	}
 
 	/**
-	 * ±©Á¦»ñÈ¡¶ÔÏó±äÁ¿Öµ,ºöÂÔprivate,protectedĞŞÊÎ·ûµÄÏŞÖÆ.
+	 * æš´åŠ›è·å–å¯¹è±¡å˜é‡å€¼,å¿½ç•¥private,protectedä¿®é¥°ç¬¦çš„é™åˆ¶.
 	 * 
 	 * @throws NoSuchFieldException
-	 *             Èç¹ûÃ»ÓĞ¸ÃFieldÊ±Å×³ö.
+	 *             å¦‚æœæ²¡æœ‰è¯¥Fieldæ—¶æŠ›å‡º.
 	 */
 	public static Object forceGetProperty(Object object, String propertyName)
 			throws NoSuchFieldException
@@ -294,10 +294,10 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 	}
 
 	/**
-	 * ±©Á¦ÉèÖÃ¶ÔÏó±äÁ¿Öµ,ºöÂÔprivate,protectedĞŞÊÎ·ûµÄÏŞÖÆ.
+	 * æš´åŠ›è®¾ç½®å¯¹è±¡å˜é‡å€¼,å¿½ç•¥private,protectedä¿®é¥°ç¬¦çš„é™åˆ¶.
 	 * 
 	 * @throws NoSuchFieldException
-	 *             Èç¹ûÃ»ÓĞ¸ÃFieldÊ±Å×³ö.
+	 *             å¦‚æœæ²¡æœ‰è¯¥Fieldæ—¶æŠ›å‡º.
 	 */
 	public static void forceSetProperty(Object object, String propertyName,
 			Object newValue) throws NoSuchFieldException
@@ -320,10 +320,10 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 	}
 
 	/**
-	 * ±©Á¦µ÷ÓÃ¶ÔÏóº¯Êı,ºöÂÔprivate,protectedĞŞÊÎ·ûµÄÏŞÖÆ.
+	 * æš´åŠ›è°ƒç”¨å¯¹è±¡å‡½æ•°,å¿½ç•¥private,protectedä¿®é¥°ç¬¦çš„é™åˆ¶.
 	 * 
 	 * @throws NoSuchMethodException
-	 *             Èç¹ûÃ»ÓĞ¸ÃMethodÊ±Å×³ö.
+	 *             å¦‚æœæ²¡æœ‰è¯¥Methodæ—¶æŠ›å‡º.
 	 */
 	public static Object invokePrivateMethod(Object object, String methodName,
 			Object... params) throws NoSuchMethodException
@@ -348,7 +348,7 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 			}
 			catch (NoSuchMethodException e)
 			{
-				// ·½·¨²»ÔÚµ±Ç°Àà¶¨Òå,¼ÌĞøÏòÉÏ×ªĞÍ
+				// æ–¹æ³•ä¸åœ¨å½“å‰ç±»å®šä¹‰,ç»§ç»­å‘ä¸Šè½¬å‹
 			}
 		}
 
@@ -372,7 +372,7 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 	}
 
 	/**
-	 * °´FiledµÄÀàĞÍÈ¡µÃFieldÁĞ±í.
+	 * æŒ‰Filedçš„ç±»å‹å–å¾—Fieldåˆ—è¡¨.
 	 */
 	public static List<Field> getFieldsByType(Object object, Class<?> type)
 	{
@@ -389,7 +389,7 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 	}
 
 	/**
-	 * °´FiledName»ñµÃFieldµÄÀàĞÍ.
+	 * æŒ‰FiledNameè·å¾—Fieldçš„ç±»å‹.
 	 */
 	public static Class<?> getPropertyType(Class<?> type, String name)
 			throws NoSuchFieldException
@@ -398,7 +398,7 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 	}
 
 	/**
-	 * »ñµÃfieldµÄgetterº¯ÊıÃû³Æ.
+	 * è·å¾—fieldçš„getterå‡½æ•°åç§°.
 	 */
 	public static String getGetterName(Class<?> type, String fieldName)
 	{
@@ -416,7 +416,7 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 	}
 
 	/**
-	 * »ñµÃfieldµÄgetterº¯Êı,Èç¹ûÕÒ²»µ½¸Ã·½·¨,·µ»Ønull.
+	 * è·å¾—fieldçš„getterå‡½æ•°,å¦‚æœæ‰¾ä¸åˆ°è¯¥æ–¹æ³•,è¿”å›null.
 	 */
 	public static Method getGetterMethod(Class<?> type, String fieldName)
 	{

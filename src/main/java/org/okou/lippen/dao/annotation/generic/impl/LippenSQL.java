@@ -29,11 +29,11 @@ public class LippenSQL<T> extends SQL
 		StringBuffer sb = new StringBuffer();
 		for (Field f : fields)
 		{
-			//TODO Í¨¹ıID×¢½âÀ´ÅÅ¶Ó£¬²»ÄÜÍ¨¹ıÃû×Ö
+			//TODO é€šè¿‡IDæ³¨è§£æ¥æ’é˜Ÿï¼Œä¸èƒ½é€šè¿‡åå­—
 			if(skipId && f.getName().equals("id"))continue;
 			if (sb.length() > 0)
 				sb.append(",");
-			//TODO ²»ÄÜÖ±½ÓÓÃ×Ö¶ÎÃû£¬ÒªÓÃcolumn×¢½âÀ´È¡Öµ
+			//TODO ä¸èƒ½ç›´æ¥ç”¨å­—æ®µåï¼Œè¦ç”¨columnæ³¨è§£æ¥å–å€¼
 			sb.append(f.getName());
 		}
 		return sb.toString();
@@ -58,7 +58,7 @@ public class LippenSQL<T> extends SQL
 			{
 				if (sb.length() > 0)
 					sb.append(prepend);
-				//TODO ²»ÄÜÖ±½ÓÓÃ×Ö¶ÎÃû£¬ÒªÓÃcolumn×¢½âÀ´È¡Öµ
+				//TODO ä¸èƒ½ç›´æ¥ç”¨å­—æ®µåï¼Œè¦ç”¨columnæ³¨è§£æ¥å–å€¼
 				sb.append(f.getName()).append("=").append(o);
 			}
 		}

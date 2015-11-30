@@ -1,0 +1,93 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/lang
+		http://www.springframework.org/schema/lang/spring-lang-3.0.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+	default-lazy-init="false">
+
+	<!-- proxool超级连接池 -->
+<!--	<bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">-->
+<!--		<property name="driver">-->
+<!--			<value>${data.source.driver}</value>-->
+<!--		</property>-->
+<!--		<property name="driverUrl">-->
+<!--			<value>${data.source.driverUrl}</value>-->
+<!--		</property>-->
+<!--		<property name="user">-->
+<!--			<value>${data.source.user}</value>-->
+<!--		</property>-->
+<!--		<property name="password">-->
+<!--			<value>${data.source.password}</value>-->
+<!--		</property>-->
+<!--		<property name="alias">-->
+<!--			<value>${data.source.alias}</value>-->
+<!--		</property>-->
+<!--		 <property name="houseKeepingSleepTime"> <value>${data.source.houseKeepingSleepTime}</value> -->
+<!--			</property> -->
+<!--		<property name="houseKeepingTestSql">-->
+<!--			<value>select CURRENT_DATE</value>-->
+<!--		</property>-->
+<!--		<property name="simultaneousBuildThrottle">-->
+<!--			<value>${data.source.simultaneousBuildThrottle}</value>-->
+<!--		</property>-->
+<!--		<property name="prototypeCount">-->
+<!--			<value>${data.source.prototypeCount}</value>-->
+<!--		</property>-->
+<!--		<property name="maximumConnectionCount">-->
+<!--			<value>${data.source.maximumConnectionCount}</value>-->
+<!--		</property>-->
+<!--		<property name="minimumConnectionCount">-->
+<!--			<value>${data.source.minimumConnectionCount}</value>-->
+<!--		</property>-->
+<!--		<property name="maximumActiveTime">-->
+<!--			<value>${data.source.maximumActiveTime}</value>-->
+<!--		</property>-->
+<!--		<property name="trace">-->
+<!--			<value>${data.source.trace}</value>-->
+<!--		</property>-->
+<!--		<property name="verbose">-->
+<!--			<value>${data.source.verbose}</value>-->
+<!--		</property>-->
+<!--		<property name="delegateProperties">-->
+<!--			<value>-->
+<!--				user=${data.source.user},password=${data.source.password}-->
+<!--			</value>-->
+<!--		</property>-->
+<!--	</bean>-->
+
+	<bean id="sqlExecutor"
+		class="org.okou.lippen.dao.sqlmap.spring.orm.ibatis.LimitSqlExecutor">
+		<property name="dialect">
+			<bean class="org.okou.lippen.dao.sqlmap.spring.orm.ibatis.dialect.MySQLDialect" />
+		</property>
+	</bean>
+
+	<bean id="sqlMapClient"
+		class="org.okou.lippen.dao.sqlmap.spring.orm.ibatis.LippenSqlMapClientFactoryBean">
+		<property name="configLocation" value="${ibatis.config.location}" />
+		<property name="mappingLocations" value="${ibatis.mapping.locations}" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="sqlExecutor" ref="sqlExecutor" />
+	</bean>
+
+	<bean id="sqlMapClientTemplate"
+		class="org.okou.lippen.dao.sqlmap.spring.orm.ibatis.LippenSqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	
+	
+	
+	
+</beans>

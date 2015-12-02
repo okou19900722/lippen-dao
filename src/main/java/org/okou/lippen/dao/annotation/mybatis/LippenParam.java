@@ -12,7 +12,8 @@ public class LippenParam<T>
 	}
 	public LippenParam(T po, Integer maxResults)
 	{
-		this(po, null, maxResults);
+		//limit num 表示从0开始取num个，所以此处firstResult为0
+		this(po, 0, maxResults);
 	}
 	public LippenParam(T po, Integer firstResult, Integer maxResults)
 	{
@@ -35,5 +36,8 @@ public class LippenParam<T>
 	}
 	
 	
-	
+	public void setId(Object o)
+	{
+		System.err.println("set id" + o);
+	}
 }

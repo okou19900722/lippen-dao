@@ -10,12 +10,12 @@ public interface IGenericMapper
 	public <T> List<T> find(T query);
 	
 	public <T> List<Map<String, Object>> find(LippenParam<T> query);
-	public <T> Map<String, Object> get(T query);
+	public <T> Map<String, Object> get(LippenParam<T> query);
 
-	public <T> void save(T po);
+	public <T> void save(LippenParam<T> query);
 
-	public <T> int update(T po);
+	public <T> Integer update(LippenParam<T> query);
 
-	public <T> int delete(T po);
+	public <T> Integer delete(LippenParam<T> query);
 	
 }

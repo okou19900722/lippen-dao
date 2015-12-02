@@ -13,16 +13,31 @@ import org.okou.lippen.dao.annotation.mybatis.provider.LippenGenericSqlProvider;
 
 public interface GenericMapper extends IGenericMapper
 {
-	@SelectProvider(type=LippenGenericSqlProvider.class, method="findAll")
-	public <T> List<Map<String, Object>> find(LippenParam<T> query);
+	@SelectProvider
+	(type=LippenGenericSqlProvider.class, method="findAll")
+	public <T> 
+	List<Map<String, Object>> 
+	find(LippenParam<T> query);
+	
 	@SelectProvider(type=LippenGenericSqlProvider.class, method="get")
-	public <T> Map<String, Object> get(T query);
+	public <T> 
+	Map<String, Object> 
+	get(LippenParam<T> query);
+	
 	@InsertProvider(type=LippenGenericSqlProvider.class, method="save")
 	@Options(useGeneratedKeys=true)
-	public <T> void save(T po);
+	public <T> 
+	void 
+	save(LippenParam<T> query);
+	
 	@UpdateProvider(type=LippenGenericSqlProvider.class, method="update")
-	public <T> int update(T po);
+	public <T> 
+	Integer 
+	update(LippenParam<T> query);
+	
 	@UpdateProvider(type=LippenGenericSqlProvider.class, method="delete")
-	public <T> int delete(T po);
+	public <T> 
+	Integer 
+	delete(LippenParam<T> query);
 	
 }

@@ -33,8 +33,7 @@ public class GenericMapperDaoImpl<T extends IMapperEntity> implements IGenericMa
 			List<T> result = new ArrayList<T>();
 			for (Map<String, Object> map : list)
 			{
-				T po = clazz.newInstance();
-				parseToObject(po, clazz, map);
+				T po = parseToObject(clazz, map);
 				result.add(po);
 			}
 			return result;
@@ -49,10 +48,9 @@ public class GenericMapperDaoImpl<T extends IMapperEntity> implements IGenericMa
 	public T get(T query)
 	{
 		try{
-			Map<String, Object> map = session.getMapper(query.getMapperClass()).get(query);
+			Map<String, Object> map = session.getMapper(query.getMapperClass()).get(new LippenParam<T>(query));
 			Class<T> clazz = (Class<T>) query.getClass();
-			T po = clazz.newInstance();
-			parseToObject(po, clazz, map);
+			T po = parseToObject(clazz, map);
 			return po;
 		}
 		catch(Exception e)
@@ -64,36 +62,38 @@ public class GenericMapperDaoImpl<T extends IMapperEntity> implements IGenericMa
 	@Override
 	public void save(T po)
 	{
-		session.getMapper(po.getMapperClass()).save(po);
+		session.getMapper(po.getMapperClass()).save(new LippenParam<T>(po));
 	}
 
 	@Override
 	public int update(T po)
 	{
-		return session.getMapper(po.getMapperClass()).update(po);
+		return session.getMapper(po.getMapperClass()).update(new LippenParam<T>(po));
 	}
 
 	@Override
 	public int delete(T po)
 	{
-		return session.getMapper(po.getMapperClass()).delete(po);
+		Integer i = session.getMapper(po.getMapperClass()).delete(new LippenParam<T>(po));
+		System.err.println(i);
+		return i;
 	}
 
 	public void setSession(SqlSession session)
 	{
 		this.session = session;
 	}
-
 	
-	
-	private void parseToObject(T po, Class<T> clazz, Map<String, Object> map) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException
+	private T parseToObject(Class<T> clazz, Map<String, Object> map) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InstantiationException
 	{
+		if(map == null)return null;
+		T po = clazz.newInstance();
 		for(Entry<String, Object> e : map.entrySet())
 		{
 			Field f = clazz.getDeclaredField(e.getKey());
 			f.setAccessible(true);
 			f.set(po, e.getValue());
 		}
-		
+		return po;
 	}
 }

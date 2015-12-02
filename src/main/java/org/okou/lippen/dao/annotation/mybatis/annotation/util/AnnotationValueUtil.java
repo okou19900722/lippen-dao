@@ -38,9 +38,13 @@ public class AnnotationValueUtil
 			throw new RuntimeException("type " + element + " need a annotation with org.okou.lippen.dao.annotation.mybatis.annotation.Table");
 		}
 		T t = element.getAnnotation(annotation);
-		Method m = t.getClass().getMethod("value");
-		String table = (String) m.invoke(t);
-		table = "".equals(table) ? StringUtils.lowerCaseFirstWord(defaultName) : table;
-		return table;
+		String value = t == null ? StringUtils.lowerCaseFirstWord(defaultName) : null;
+		if(t != null)
+		{
+			Method m = t.getClass().getMethod("value");
+			String annotationValue = (String) m.invoke(t);
+			value = "".equals(annotationValue) ? StringUtils.lowerCaseFirstWord(defaultName) : annotationValue;
+		}
+		return value;
 	}
 }

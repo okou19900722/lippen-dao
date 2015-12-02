@@ -1,104 +1,66 @@
 package org.okou.lippen.dao.annotation.mybatis.provider;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.okou.lippen.dao.annotation.generic.impl.LippenSQL;
 import org.okou.lippen.dao.annotation.mybatis.LippenParam;
-import org.okou.lippen.dao.annotation.mybatis.annotation.Table;
-import org.okou.lippen.dao.annotation.mybatis.annotation.util.AnnotationValueUtil;
 
 public class LippenGenericSqlProvider
 {
 	public <T> String findAll(LippenParam<T> p) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException
 	{
-		Class<?> c = p.getClass();
-		final String tableName = AnnotationValueUtil.getValue(c, Table.class, c.getSimpleName());
-		return new LippenSQL<T>(){
+		String s =  new LippenSQL<T>(p){
 			{
 				SELECT("*");
 				FROM(tableName);
+				WHERE(getValueNotNullExpressions(fieldList, AND));
 			}
 		}.toString();
+		System.err.println(s);
+		return s;
 	}
-	public <T> String get(T p) throws IllegalAccessException, SecurityException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException
+	public <T> String get(LippenParam<T> p) throws IllegalAccessException, SecurityException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException
 	{
-		Class<?> c = p.getClass();
-		final String tableName = AnnotationValueUtil.getValue(c, Table.class, c.getSimpleName());
-		Field[] fields = p.getClass().getDeclaredFields();
-		final List<Field> fieldList = new ArrayList<Field>();
-		for (Field field : fields)
-		{
-			if(!Modifier.isStatic(field.getModifiers()))
+		return new LippenSQL<T>(p){
 			{
-				fieldList.add(field);
-			}
-		}
-		return new LippenSQL<T>(new LippenParam<T>(p))
-		{
-			{
-				SELECT(getColumns(fieldList));
+				SELECT("*");
 				FROM(tableName);
-				WHERE(getWhereSQL(fieldList, AND));
+				WHERE(getValueNotNullExpressions(fieldList, AND));
 			}
 		}.toString();
 	}
-	public <T> String save(T p) throws IllegalAccessException, SecurityException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException
+	public <T> String save(LippenParam<T> p) throws IllegalAccessException, SecurityException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException
 	{
-		Class<?> c = p.getClass();
-		final String tableName = AnnotationValueUtil.getValue(c, Table.class, c.getSimpleName());
-		Field[] fields = p.getClass().getDeclaredFields();
-		final List<Field> fieldList = new ArrayList<Field>();
-		for (Field field : fields)
-		{
-			if(!Modifier.isStatic(field.getModifiers()))
-			{
-				fieldList.add(field);
-			}
-		}
-		String s =  new LippenSQL<T>(new LippenParam<T>(p))
+		return new LippenSQL<T>(p)
 		{
 			{
 				INSERT_INTO(tableName);
-				VALUES(getColumns(fieldList, true), getValuesSQL(fieldList, ","));
+				VALUES(getInsertColumnsExpressions(fieldList), getInsertValueExpressions(fieldList));
 			}
 		}.toString();
-		return s;
 	}
-	//TODO 添加update 和 delete 的sql语句，然后返回
-	public String update()
+	public <T> String update(LippenParam<T> p) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException
 	{
-		return null;
+		
+		return new LippenSQL<T>(p)
+		{
+			{
+				UPDATE(tableName);
+				SET(getValueNotNullExpressions(fieldList, ","));
+				WHERE("id=#{po.id}");
+			}
+		}.toString();
 	}
 	//TODO 通过@link{TestTeacherMapper}进行单元测试
-	public String delete()
+	public <T> String delete(LippenParam<T> p) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException
 	{
-		return null;
-	}
-	/**
-	 * 默认非静态的变量都是column
-	 * @param c
-	 * @return
-	 *
-	 *@author 严尚君
-	 *
-	 *@date 2015-11-30
-	 */
-	private List<Field> getColumnField(Class<?> c)
-	{
-		Field[] fields = c.getDeclaredFields();
-		List<Field> fieldList = new ArrayList<Field>();
-		for (Field field : fields)
+		return new LippenSQL<T>(p)
 		{
-			if(!Modifier.isStatic(field.getModifiers()))
 			{
-				fieldList.add(field);
+				DELETE_FROM(tableName);
+				WHERE("id=#{po.id}");
 			}
-		}
-		return fieldList;
+		}.toString();
 	}
 	
 }

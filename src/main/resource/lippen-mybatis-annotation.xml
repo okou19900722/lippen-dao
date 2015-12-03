@@ -33,8 +33,8 @@
 		<property name="alias">
 			<value>${data.source.alias}</value>
 		</property>
-		 <property name="houseKeepingSleepTime"> <value>${data.source.houseKeepingSleepTime}</value>
-			</property>
+		<!-- <property name="houseKeepingSleepTime"> <value>${data.source.houseKeepingSleepTime}</value> 
+			</property> -->
 		<property name="houseKeepingTestSql">
 			<value>select CURRENT_DATE</value>
 		</property>
@@ -59,6 +59,7 @@
 		<property name="verbose">
 			<value>${data.source.verbose}</value>
 		</property>
+		<!--may be a bug -->
 		<property name="delegateProperties">
 			<value>
 				user=${data.source.user},password=${data.source.password}
@@ -66,27 +67,17 @@
 		</property>
 	</bean>
 
-	<bean id="sqlExecutor"
-		class="org.okou.lippen.dao.sqlmap.spring.orm.ibatis.LimitSqlExecutor">
-		<property name="dialect">
-			<bean class="org.okou.lippen.dao.sqlmap.spring.orm.ibatis.dialect.MySQLDialect" />
-		</property>
-	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+	       <property name="dataSource" ref="dataSource" />  
+	</bean> 
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"> 
+		<constructor-arg index="0" ref="sqlSessionFactory"/>
+	</bean> 
 
-	<bean id="sqlMapClient"
-		class="org.okou.lippen.dao.sqlmap.spring.orm.ibatis.LippenSqlMapClientFactoryBean">
-		<property name="configLocation" value="${ibatis.config.location}" />
-		<property name="mappingLocations" value="${ibatis.mapping.locations}" />
-		<property name="dataSource" ref="dataSource" />
-		<property name="sqlExecutor" ref="sqlExecutor" />
+	<bean class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="org.okou.lippen.dao.annotation.generic.GenericMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-
-	<bean id="sqlMapClientTemplate"
-		class="org.okou.lippen.dao.sqlmap.spring.orm.ibatis.LippenSqlMapClientTemplate">
-		<property name="sqlMapClient" ref="sqlMapClient" />
-	</bean>
-
-	
 	
 	
 	

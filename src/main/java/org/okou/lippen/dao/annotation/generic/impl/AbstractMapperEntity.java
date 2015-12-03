@@ -6,6 +6,8 @@ import org.okou.lippen.dao.annotation.generic.GenericMapper;
 
 public abstract class AbstractMapperEntity implements IMapperEntity
 {
+	private static final long serialVersionUID = -8835127530266011504L;
+
 	@Override
 	public Class<? extends IGenericMapper> getMapperClass()
 	{

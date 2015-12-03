@@ -178,7 +178,7 @@ import javax.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.okou.ibatis.model.User;
-import org.okou.lippen.dao.sqlmap.generic.IGenericSqlMapDao;
+import org.okou.lippen.dao.IGenericDao;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -187,14 +187,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations={"classpath:ibatis-sqlmap-property.xml", "classpath:lippen-ibatis.xml", "classpath:ibatis-test.xml"})
 public class TestIbatisGenericDao
 {
-    @Resource
-	IGenericSqlMapDao<User> ibatisGenericSqlMapDao;
+	@Resource
+	IGenericDao<User> ibatisGenericSqlMapDao;
 	
 	@Test
 	public void test()
 	{
 		User u = new User();
-		u.setId(1);
+		u.setId(12);
 		System.out.println(ibatisGenericSqlMapDao.get(u));
 	}
 }

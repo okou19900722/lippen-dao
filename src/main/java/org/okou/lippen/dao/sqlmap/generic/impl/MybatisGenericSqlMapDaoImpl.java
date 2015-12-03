@@ -7,6 +7,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.okou.lippen.dao.sqlmap.ISqlMapEntity;
 import org.okou.lippen.dao.sqlmap.generic.IGenericSqlMapDao;
 
+/**
+ * mybatis实现的通用dao
+ * @author okou
+ *
+ * @date 2015年12月3日 下午4:38:23
+ */
 public class MybatisGenericSqlMapDaoImpl<T extends ISqlMapEntity> extends
 		SqlSessionDaoSupport implements IGenericSqlMapDao<T>
 {

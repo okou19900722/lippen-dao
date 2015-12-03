@@ -14,6 +14,12 @@ import org.okou.lippen.dao.annotation.mybatis.annotation.Table;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.StringUtils;
 
+/**
+ * sql生成工具类
+ * @author okou
+ *
+ * @date 2015年12月3日 下午5:39:08
+ */
 public class LippenSQL<T> extends SQL
 {
 	protected static final String AND = ") \nAND (";

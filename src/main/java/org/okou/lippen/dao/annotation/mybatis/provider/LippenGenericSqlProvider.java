@@ -5,6 +5,12 @@ import java.lang.reflect.InvocationTargetException;
 import org.okou.lippen.dao.annotation.generic.impl.LippenSQL;
 import org.okou.lippen.dao.annotation.mybatis.LippenParam;
 
+/**
+ * 通用mapper动态sql处理类
+ * @author okou
+ *
+ * @date 2015年12月3日 下午5:22:52
+ */
 public class LippenGenericSqlProvider
 {
 	public <T> String findAll(LippenParam<T> p) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException
@@ -51,7 +57,6 @@ public class LippenGenericSqlProvider
 			}
 		}.toString();
 	}
-	//TODO 通过@link{TestTeacherMapper}进行单元测试
 	public <T> String delete(LippenParam<T> p) throws SecurityException, IllegalArgumentException, NoSuchMethodException, IllegalAccessException, InvocationTargetException
 	{
 		return new LippenSQL<T>(p)

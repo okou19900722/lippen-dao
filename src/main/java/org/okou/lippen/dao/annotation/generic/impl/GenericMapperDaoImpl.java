@@ -12,6 +12,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.okou.lippen.dao.annotation.IMapperEntity;
 import org.okou.lippen.dao.annotation.generic.IGenericMapperDao;
 import org.okou.lippen.dao.annotation.mybatis.LippenParam;
+/**
+ * 通用annotation 版dao实现类，通过model对象获得mapper接口类，来调用对应方法 
+ * @author okou
+ *
+ * @date 2015年12月3日 下午5:37:57
+ */
 @SuppressWarnings("unchecked")
 public class GenericMapperDaoImpl<T extends IMapperEntity> implements IGenericMapperDao<T>
 {

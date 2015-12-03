@@ -11,6 +11,12 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapExecutor;
 
+/**
+ * ibatis 实现的通用dao
+ * @author okou
+ *
+ * @date 2015年12月3日 下午4:39:24
+ */
 @SuppressWarnings("deprecation")
 public class IBatisGenericSqlMapDaoImpl<T extends ISqlMapEntity> extends
 		SqlMapClientDaoSupport implements IGenericSqlMapDao<T>

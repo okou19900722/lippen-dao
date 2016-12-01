@@ -11,6 +11,7 @@ import com.ibatis.sqlmap.client.SqlMapExecutor;
 import com.ibatis.sqlmap.client.SqlMapSession;
 import com.ibatis.sqlmap.client.event.RowHandler;
 
+import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.JdbcUpdateAffectedIncorrectNumberOfRowsException;
@@ -76,7 +77,7 @@ import org.springframework.util.Assert;
 public class LippenSqlMapClientTemplate extends SqlMapClientTemplate implements
 		SqlMapClientOperations
 {
-
+	Logger logger = Logger.getLogger(getClass());
 	/**
 	 * Create a new SqlMapClientTemplate.
 	 */

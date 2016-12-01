@@ -3,3 +3,4 @@ target
 
 #eclipse config
 .settings
+.classpath

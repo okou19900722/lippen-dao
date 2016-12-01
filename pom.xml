@@ -47,12 +47,12 @@
 			<version>2.3.4.726</version>
 		</dependency>
 		<dependency>
-			<groupId>proxool</groupId>
+			<groupId>com.cloudhopper.proxool</groupId>
 			<artifactId>proxool</artifactId>
 			<version>0.9.1</version>
 		</dependency>
 		<dependency>
-			<groupId>proxool</groupId>
+			<groupId>com.cloudhopper.proxool</groupId>
 			<artifactId>proxool-cglib</artifactId>
 			<version>0.9.1</version>
 		</dependency>
